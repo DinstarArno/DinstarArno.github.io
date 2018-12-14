@@ -2,25 +2,24 @@
 layout: post
 title: skynet中的基础数据结构(一)
 date: 2018-12-14
-categories: blog
+categories: blog``
 tags: [skynet,数据结构]
 description: 文章金句。
 ---
-*skynet网络节点 每个skynet都是全局网络中的一个节点
-'''
-struct skynet_node {
-	int total;		// 节点总数
-	int init;      // 初始化标志
-	uint32_t monitor_exit; 
-	pthread_key_t handle_key;//线程私有变量
-	bool profile;	// default is off
+
+* skynet网络节点 每个skynet都是全局网络中的一个节点  
+```
+struct skynet_node {  
+	int total;		// 节点总数  
+	int init;  // 初始化标志  
+	uint32_t monitor_exit;  
+	pthread_key_t handle_key;//线程私有变量  
+	bool profile;	// default is off  
 };
-
-static struct skynet_node G_NODE;
-'''
-
-*环境变量 skynet启动后会启动一个lua虚拟机里把环境变量和配置储存起来。
-'''
+static struct skynet_node G_NODE;   
+```
+* 环境变量 skynet启动后会启动一个lua虚拟机里把环境变量和配置储存起来。
+```
 struct skynet_env {
 	struct spinlock lock; // 锁（互斥锁和自旋锁）
 	lua_State *L; // lua虚拟机指针
@@ -36,9 +35,9 @@ struct skynet_config {
 	const char * logger; // 日志虚拟机名称 默认 logger
 	const char * logservice; // 日志服务logger
 };
-'''
-*服务节点管理
-'''
+```
+* 服务节点管理
+```
 struct handle_storage {
 	struct rwlock lock; // 锁 读写
 	uint32_t harbor; // 节点ID
@@ -49,9 +48,9 @@ struct handle_storage {
 	int name_count; // 当前name表的大小
 	struct handle_name *name; // 服务名称表
 };
-'''
-*全局队列 head,tail分别指向队列的头尾：一级队列 head,tail 头尾坐标 消息入队后头尾相撞说明队列已经满了 扩展队列
-'''
+```
+* 全局队列 head,tail分别指向队列的头尾：一级队列 head,tail 头尾坐标 消息入队后头尾相撞说明队列已经满了 扩展队列
+```
 消息结构
 struct skynet_message {
 	uint32_t source; // 源地址
@@ -79,11 +78,10 @@ struct global_queue {
 	struct message_queue *tail; // 指向队列的尾节点
 	struct spinlock lock; // 锁（互斥锁和自旋锁）
 };
-'''
-*c库模块
-'''
-#define MAX_MODULE_TYPE 32
-
+```
+* c库模块
+```
+/#define MAX_MODULE_TYPE 32
 struct skynet_module {
 	const char * name; // 名字
 	void * module; // 库指针 
@@ -98,9 +96,9 @@ struct modules {
 	const char * path; // 动态库的路径
 	struct skynet_module m[MAX_MODULE_TYPE]; // 库表
 };
-'''
-*计数器结构
-'''
+```
+* 计数器结构
+```
 struct timer {
 	struct link_list near[TIME_NEAR]; // 超时近点哈希表
 	struct link_list t[4][TIME_LEVEL]; // 超时远点多级哈希表
@@ -110,9 +108,9 @@ struct timer {
 	uint64_t current; // 系统启动到现场的时间差 百分之一秒
 	uint64_t current_point; //上次计数器唤醒与启动时间差 百分之一秒
 };
-'''
-*Socket结构
-'''
+```
+* Socket结构
+```
 struct socket_server {
 	int recvctrl_fd; // 一对fd,构成管道接收端
 	int sendctrl_fd;// 一对fd,构成管道发送端
@@ -128,9 +126,9 @@ struct socket_server {
 	uint8_t udpbuffer[MAX_UDP_PACKAGE]; // 缓冲区
 	fd_set rfds;//监听套接字集合
 };
-'''
-*监视器结构
-'''
+```
+* 监视器结构
+```
 struct skynet_monitor {
 	int version; // 当前版本号
 	int check_version; // 检查的版本号
@@ -145,7 +143,7 @@ struct monitor {
 	int sleep; // 休眠中的线程数量
 	int quit; // 退出标志
 };
-'''
+```
 
 
 
