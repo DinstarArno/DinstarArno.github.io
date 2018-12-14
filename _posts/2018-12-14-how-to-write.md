@@ -3,7 +3,7 @@ layout: post
 title: skynet中的基础数据结构(一)
 date: 2018-12-14
 categories: blog``
-tags: [skynet,数据结构]
+tags: [skynet数据结构]
 description: 文章金句。
 ---
 
