@@ -3,11 +3,11 @@ layout: post
 title: skynet启动流程(一)
 date: 2018-12-17
 categories: blog``
-tags: [skynet数据结构]
+tags: [skynet启动流程]
 description: 文章金句。
 ---
 * skynet基础模块关系图
-  ![图](img/skynet.png)
+  ![图](https://dinstararno.github.io/img/keynet.png)
 * skynet启动
   * 配置初始化  
   	```
@@ -52,7 +52,7 @@ description: 文章金句。
 		config.logservice = optstring("logservice", "logger");
 		config.profile = optboolean("profile", 1);
   	```
-	* 资源初始化
+  * 资源初始化
 	```
 		文件skynet_start.c中：
 
@@ -66,7 +66,7 @@ description: 文章金句。
 		...	
 		start(config->thread);//启动线程
 	```
-	* 模块启动
+  * 模块启动
 	```	
 		文件skynet_start.c中：
 
