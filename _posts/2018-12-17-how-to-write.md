@@ -2,7 +2,7 @@
 layout: post
 title: skynet启动流程(一)
 date: 2018-12-17
-categories: blog``
+categories: blog
 tags: [skynet启动流程]
 description: 文章金句。
 ---
